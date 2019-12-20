@@ -8,8 +8,14 @@ import java.util.List;
  * 트럼프 카드 전체 생성을 담당하는 객체
  */
 public class CardFactory {
-	private static List<Card> deck = CardFactory.create();
-	public static int cardSize = deck.size();
+	public static int cardSize = 52;
+	private static boolean[] usedCard = new boolean[CardFactory.cardSize];
+	
+	private final List<Card> deck;
+	
+	public CardFactory() {
+		deck = create();
+	}
 	
     public static List<Card> create() {
         List<Card> cards = new ArrayList<>();
@@ -27,7 +33,32 @@ public class CardFactory {
         }
     }
     
-    public static List<Card> getDeck() {
+    public List<Card> getDeck() {
     	return deck;
     }
+    
+	public int cardIsUsed(int inx) throws Exception {
+		if (usedCard[inx]) {
+			throw new Exception();
+		}
+		
+		usedCard[inx] = true;
+		return inx;
+	}
+	
+	public Card selectedCard() {
+		return deck.get(getCardIndex());
+	}
+	
+	public int getCardIndex() {
+		try {
+			return cardIsUsed(selectCard());
+		} catch (Exception e) {
+			return getCardIndex();
+		}
+	}
+	
+	public int selectCard() {
+		return (int)(Math.random() * cardSize);
+	}
 }

@@ -36,14 +36,7 @@ public class Card {
         return symbol.getName() + type.getName();
     }
     
-    public int getScore() {
-    	return symbol.getScore();
-    }
-    
-    public boolean isAce() {
-    	if (symbol.getName().equals("A")) {
-    		return true;
-    	}
-    	return false;
+    public Symbol getSymbol() {
+    	return symbol;
     }
 }
