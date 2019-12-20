@@ -16,4 +16,8 @@ public abstract class User {
 	public abstract String getFirstCardResult();
 	
 	public abstract Name getName();
+	
+	public String getEachResult() {
+		return getName().toString() + " 카드 : " + getCards().cardResult();
+	}
 }

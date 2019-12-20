@@ -24,7 +24,7 @@ public class Player extends User {
     
     public BettingMoney bettingMoney() {
     	if (cards.isBlackJack()) {
-    		return bettingMoney.multipleOnePointFive();
+    		return bettingMoney.multiplyOnePointFive();
     	}
     	
     	return bettingMoney;

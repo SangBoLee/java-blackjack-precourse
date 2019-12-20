@@ -13,10 +13,9 @@ public class BettingMoney {
 		}
 		
 		this.bettingMoney = Integer.parseInt(bettingMoney);
-		System.out.println();
 	}
 	
-	public BettingMoney multipleOnePointFive() {
+	public BettingMoney multiplyOnePointFive() {
 		String money = String.valueOf(bettingMoney * OnePointFive);
 		return new BettingMoney(money);
 	}

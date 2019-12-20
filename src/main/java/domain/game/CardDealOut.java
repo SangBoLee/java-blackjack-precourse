@@ -2,7 +2,6 @@ package domain.game;
 
 import domain.card.CardFactory;
 import domain.user.Player;
-import domain.user.PlayerNameRepository;
 import domain.user.User;
 import domain.user.UserRepository;
 import domain.user.YesOrNo;
@@ -16,24 +15,15 @@ public class CardDealOut {
 	
 	private CardFactory deck = new CardFactory();
 	private UserRepository userRepository;
-	private PlayerNameRepository playerNameRepository;
 	
-	public CardDealOut(PlayerNameRepository playerNameRepository, 
-			UserRepository userRepository) {
-		this.playerNameRepository = playerNameRepository;
+	public CardDealOut(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 	
 	public void firstDealOut() {
-		ViewOutput viewOutput = new ViewOutput();
-		giveUserCard();
-		viewOutput.showFirstResult(playerNameRepository, userRepository);
-	}
-	
-	public void giveUserCard() {
-		for (User user : userRepository.getUserList()) {
-			giveTwoCard(user);
-		}
+		userRepository.getUserList().stream()
+									.forEach(user -> giveTwoCard(user));
+		ViewOutput.showFirstResult(userRepository);
 	}
 	
 	public void giveTwoCard(User user) {
@@ -63,15 +53,12 @@ public class CardDealOut {
 	}
 	
 	public void checkAnswer(User user) {
-		ViewInput viewInput = new ViewInput();
 		YesOrNo yesOrNo;
-		ViewOutput viewOutput = new ViewOutput();
 		
 		do {
-			yesOrNo = viewInput.askGetCard((Player)user);
+			yesOrNo = ViewInput.askGetCard((Player)user);
 			dealOutOrNot(yesOrNo, user);
-			viewOutput.showEachResult(user);
-			System.out.println();
+			ViewOutput.showEachResult(user);
 		} while (yesOrNo.isYes() && user.getCards().getScore().isBelowBlackJack());
 	}
 	
@@ -82,12 +69,11 @@ public class CardDealOut {
 	}
 	
 	public void secondDealerDealOut() {
-		ViewOutput viewOutput = new ViewOutput();
 		User dealer = userRepository.getUserList().get(dealerInx);
 		
 		while (dealer.getCards().getScore().isBelowDealerCriteria()) {
 			dealer.addCard(deck.selectedCard());
-			viewOutput.showDealerCheck();
+			ViewOutput.showDealerCheck();
 		}
 	}
 }

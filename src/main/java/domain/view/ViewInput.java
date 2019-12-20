@@ -1,32 +1,31 @@
 package domain.view;
 
+import java.util.List;
 import java.util.Scanner;
 
 import domain.game.PlayerNameMaker;
 import domain.user.BettingMoney;
 import domain.user.Name;
 import domain.user.Player;
-import domain.user.PlayerNameRepository;
 import domain.user.PlayerNames;
 import domain.user.YesOrNo;
 
 public class ViewInput {
 	private static Scanner scanner = new Scanner(System.in);
 	
-	public PlayerNameRepository getPlayerNameRepository() {
+	public static List<Name> getPlayerNameList() {
 		try {
 			System.out.println("게임에 참여할 사람의 이름을 입력하세요.(쉼표 기준으로 분리)");
 			PlayerNames playerNames = new PlayerNames(scanner.nextLine());
 			PlayerNameMaker playerNameMaker = new PlayerNameMaker(playerNames);
-			PlayerNameRepository playerNameRepository = new PlayerNameRepository(playerNameMaker.makePlayerNameList());
-			return playerNameRepository;
+			return playerNameMaker.makePlayerNameList();
 		} catch (IllegalArgumentException e) {
 			System.out.println(e);
-			return getPlayerNameRepository();
+			return getPlayerNameList();
 		}
 	}
 	
-	public BettingMoney getBettingPrice(Name name) {
+	public static BettingMoney getBettingPrice(Name name) {
 		try {
 			System.out.println(name.toString() + "의 배팅 금액은?");
 			BettingMoney bettingMoney = new BettingMoney(scanner.nextLine());
@@ -37,7 +36,7 @@ public class ViewInput {
 		}
 	}
 	
-	public YesOrNo askGetCard(Player player) {
+	public static YesOrNo askGetCard(Player player) {
 		try {
 			System.out.println(player.getName() + "은(는) 한장의 카드를 더 받겠습니까?(예는 y,아니오는 n)");
 			YesOrNo yesOrNo = new YesOrNo(scanner.nextLine());

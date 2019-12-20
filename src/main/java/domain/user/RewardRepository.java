@@ -9,7 +9,14 @@ public class RewardRepository {
 		this.rewardList = rewardList;
 	}
 	
-	public List<Double> getRewardList() {
-		return rewardList;
+	public String getRewardResult(List<User> userList) {
+		String rewardResult = "";
+							
+		for (int i = 0; i < userList.size(); i++) {
+			User user = userList.get(i);
+			rewardResult += user.getName() + " : " + rewardList.get(i) + "\n";
+		}
+		
+		return rewardResult;
 	}
 }

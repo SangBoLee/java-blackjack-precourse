@@ -1,37 +1,26 @@
 package domain.game;
 
-import domain.user.PlayerNameRepository;
 import domain.user.RewardRepository;
 import domain.user.UserRepository;
 import domain.view.ViewInput;
 import domain.view.ViewOutput;
 
 public class Game {
-	private static Game blackJack = new Game();
 	private CardDealOut cardDealOut;
-	private PlayerNameRepository playerNameRepository;
 	private UserRepository userRepository;
 
-	public static Game getInstance() {
-		return blackJack;
-	}
-
 	public void run() {
-		ViewOutput viewOutput = new ViewOutput();
-		
 		makeUserRepository();
-		cardDealOut = new CardDealOut(playerNameRepository, userRepository);
+		cardDealOut = new CardDealOut(userRepository);
 		cardDealOut.firstDealOut();
 		cardDealOut.secondDealOut();
-		viewOutput.showAllResult(userRepository.getUserList());
+		ViewOutput.showAllResult(userRepository);
 		RewardRepository rewardRepository = makeRewardeRepository();
-		viewOutput.showAllReward(userRepository.getUserList(), rewardRepository.getRewardList());
+		ViewOutput.showAllReward(rewardRepository.getRewardResult(userRepository.getUserList()));
 	}
 	
 	public void makeUserRepository() {
-		ViewInput viewInput = new ViewInput();
-		playerNameRepository = viewInput.getPlayerNameRepository();
-		UserMaker userMaker = new UserMaker(playerNameRepository.getPlayerNameList());
+		UserMaker userMaker = new UserMaker(ViewInput.getPlayerNameList());
 		userRepository = new UserRepository(userMaker.makeUserList());
 	}
 	

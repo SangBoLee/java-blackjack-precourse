@@ -52,7 +52,7 @@ public class RewardCalculator {
 		return (userList.get(playerInx).getCards().isBlackJack() 
 				&& !userList.get(dealerInx).getCards().isBlackJack());
 	}
-	
+		
 	public int getWinnerInx(int playerInx) {
 		if (playerWin(playerInx) || playerAlwaysWin(playerInx)) {
 			return playerInx;
@@ -64,7 +64,7 @@ public class RewardCalculator {
 		Score dealerScore = userList.get(dealerInx).getCards().getScore();
 		Score playerScore = userList.get(playerInx).getCards().getScore();
 		
-		return (playerScore.isBelowBlackJack() && (playerScore.Win(dealerScore) || dealerScore.isBust()));
+		return (!playerScore.isBust() && (playerScore.Win(dealerScore) || dealerScore.isBust()));
 	}
 	
 	public int getLoserInx(int winnerInx, int playerInx) {
