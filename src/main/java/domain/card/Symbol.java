@@ -1,5 +1,7 @@
 package domain.card;
 
+import domain.user.Score;
+
 public enum Symbol {
     ACE(11, "A"),
     TWO(2, "2"),
@@ -23,8 +25,8 @@ public enum Symbol {
         this.name = name;
     }
 
-    public int getScore() {
-        return score;
+    public Score getScore() {
+        return new Score(score);
     }
     
     public String getName() {

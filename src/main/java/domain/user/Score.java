@@ -14,8 +14,8 @@ public class Score {
 		this.score = score;
 	}
 	
-	public Score calculate(int score) {
-		return new Score(this.score + score);
+	public Score calculate(Score score) {
+		return new Score(this.score + score.toInteger());
 	}
 	
 	public Score minusTen() {

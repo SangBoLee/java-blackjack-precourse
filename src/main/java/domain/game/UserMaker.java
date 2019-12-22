@@ -18,13 +18,12 @@ public class UserMaker {
 	}
 	
 	public List<User> makeUserList() {
-		ViewInput viewInput = new ViewInput();
 		List<User> userList = new ArrayList<User>();
 		Dealer dealer = new Dealer();
 		userList.add(dealer);
 		
 		for (Name name : playerNameList) {
-			BettingMoney bettingMoney = viewInput.getBettingPrice(name);
+			BettingMoney bettingMoney = ViewInput.getBettingPrice(name);
 			Player player = new Player(name, bettingMoney);
 			
 			userList.add(player);
