@@ -28,15 +28,15 @@ public class Card {
 
     @Override
     public int hashCode() {
-        return Objects.hash(symbol, type);
+    	return Objects.hash(symbol, type);
     }
 
     @Override
     public String toString() {
-        return symbol.getName() + type.getName();
+    	return symbol.toName() + type.toName();
     }
     
-    public Symbol getSymbol() {
+    public Symbol toSymbol() {
     	return symbol;
     }
 }

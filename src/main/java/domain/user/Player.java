@@ -14,12 +14,12 @@ public class Player extends User {
     
     // TODO 추가 기능 구현
     
-    public Name getName() {
+    public Name toName() {
     	return name;
     }
     
-    public String getFirstCardResult() {
-    	return cards.getCardResult();
+    public String toFirstCardResult() {
+    	return cards.toCardResult();
     }
     
     public BettingMoney bettingMoney() {

@@ -6,11 +6,11 @@ package domain.user;
 public class Dealer extends User {
     // TODO 추가 기능 구현
 	
-	public Name getName() {
+	public Name toName() {
 		return new Name("딜러");
 	}
 	
-	public String getFirstCardResult() {
-    	return cards.getFirstCard();
+	public String toFirstCardResult() {
+    	return cards.toFirstCard();
     }
 }

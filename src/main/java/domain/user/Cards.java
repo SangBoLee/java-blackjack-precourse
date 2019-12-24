@@ -16,20 +16,17 @@ public class Cards {
 		cards.add(card);
 	}
 	
-	public String getFirstCard() {
+	public String toFirstCard() {
 		return cards.get(FIRSTCARD).toString();
 	}
 	
-	public String getCardResult() {
-		String cardName = cards
-				.stream()
+	public String toCardResult() {
+		return cards.stream()
 				.map(Card::toString)
 				.collect(Collectors.joining(", "));
-		
-		return cardName;
 	}
 	
-	public Score getScore() {
+	public Score toScore() {
 		return calculateRealScore(calculateRawScore());
 	}
 	
@@ -37,7 +34,7 @@ public class Cards {
 		Score score = Score.ZERO;
 		
 		for (Card card : cards) {
-			score = score.calculate(card.getSymbol().getScore());
+			score = score.calculate(card.toSymbol().toScore());
 		}
 		
 		return score;
@@ -52,18 +49,12 @@ public class Cards {
 	
 	private boolean hasAce() {
 		return cards.stream()
-					.filter(card -> card.getSymbol().isAce())
+					.filter(card -> card.toSymbol().isAce())
 					.findFirst()
 					.isPresent();
 	}
 	
 	public boolean isBlackJack() {
-		return (cards.size() == BLACKJACK_CARDCNT && getScore().isBlackJackScore());
-	}
-	
-	public String cardResult() {
-		return cards.stream()
-					.map(Card::toString)
-					.collect(Collectors.joining(", "));
+		return (cards.size() == BLACKJACK_CARDCNT && toScore().isBlackJackScore());
 	}
 }

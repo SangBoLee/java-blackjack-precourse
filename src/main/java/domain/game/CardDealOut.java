@@ -47,7 +47,7 @@ public class CardDealOut {
 	}
 	
 	public void askOrNot(User user) {
-		if (user.getCards().getScore().isBelowBlackJack()) {
+		if (user.toCards().toScore().isBelowBlackJack()) {
 			checkAnswer(user);
 		}
 	}
@@ -59,7 +59,7 @@ public class CardDealOut {
 			yesOrNo = ViewInput.askGetCard((Player)user);
 			dealOutOrNot(yesOrNo, user);
 			ViewOutput.showEachResult(user);
-		} while (yesOrNo.isYes() && user.getCards().getScore().isBelowBlackJack());
+		} while (yesOrNo.isYes() && user.toCards().toScore().isBelowBlackJack());
 	}
 	
 	public void dealOutOrNot(YesOrNo yesOrNO, User user) {
@@ -71,7 +71,7 @@ public class CardDealOut {
 	public void secondDealerDealOut() {
 		User dealer = userRepository.getUserList().get(dealerInx);
 		
-		while (dealer.getCards().getScore().isBelowDealerCriteria()) {
+		while (dealer.toCards().toScore().isBelowDealerCriteria()) {
 			dealer.addCard(deck.selectedCard());
 			ViewOutput.showDealerCheck();
 		}

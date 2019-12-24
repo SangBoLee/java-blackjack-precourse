@@ -14,7 +14,7 @@ public class RewardRepository {
 							
 		for (int i = 0; i < userList.size(); i++) {
 			User user = userList.get(i);
-			rewardResult += user.getName() + " : " + rewardList.get(i) + "\n";
+			rewardResult += user.toName() + " : " + rewardList.get(i) + "\n";
 		}
 		
 		return rewardResult;

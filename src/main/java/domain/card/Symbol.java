@@ -25,11 +25,11 @@ public enum Symbol {
         this.name = name;
     }
 
-    public Score getScore() {
-        return new Score(score);
+    public Score toScore() {
+    	return new Score(score);
     }
     
-    public String getName() {
+    public String toName() {
     	return name;
     }
     

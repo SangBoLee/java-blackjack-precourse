@@ -12,7 +12,7 @@ public enum Type {
     	this.name = name;
     }
     
-    public String getName() {
+    public String toName() {
     	return name;
     }
 }

@@ -18,7 +18,7 @@ public class ViewOutput {
 	}
 	
 	public static void showEachResult(User user) {
-		System.out.println(user.getEachResult());
+		System.out.println(user.toEachResult());
 	}
 	
 	public static void showAllReward(String getAllReward) {
