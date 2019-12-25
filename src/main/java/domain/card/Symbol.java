@@ -26,14 +26,14 @@ public enum Symbol {
     }
 
     public Score toScore() {
-    	return new Score(score);
+        return new Score(score);
     }
     
     public String toName() {
-    	return name;
+        return name;
     }
     
     public boolean isAce() {
-    	return this == ACE;
+        return this == ACE;
     }
 }

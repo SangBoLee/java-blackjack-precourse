@@ -9,10 +9,10 @@ public enum Type {
     private String name;
     
     Type(String name) {
-    	this.name = name;
+        this.name = name;
     }
     
     public String toName() {
-    	return name;
+        return name;
     }
 }

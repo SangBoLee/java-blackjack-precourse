@@ -3,21 +3,21 @@ package domain.user;
 import domain.card.Card;
 
 public abstract class User {
-	protected final Cards cards = new Cards();
+    protected final Cards cards = new Cards();
 	
-	public void addCard(Card card) {
-    	cards.addCard(card);
+    public void addCard(Card card) {
+        cards.addCard(card);
     }
     
     public Cards toCards() {
-    	return cards;
+        return cards;
     }
 
-	public abstract String toFirstCardResult();
+    public abstract String toFirstCardResult();
 	
-	public abstract Name toName();
+    public abstract Name toName();
 	
-	public String toEachResult() {
-		return toName().toString() + " 카드 : " + toCards().toCardResult();
-	}
+    public String toEachResult() {
+        return toName().toString() + " 카드 : " + toCards().toCardResult();
+    }
 }

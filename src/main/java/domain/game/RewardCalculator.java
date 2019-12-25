@@ -9,68 +9,68 @@ import domain.user.User;
 import domain.user.UserRepository;
 
 public class RewardCalculator {
-	private final int dealerInx = 0;
-	private final int playerFirstInx = 1;
-	private List<User> userList;
-	private List<Double> rewardList = new ArrayList<Double>();
+    private final int dealerInx = 0;
+    private final int playerFirstInx = 1;
+    private List<User> userList;
+    private List<Double> rewardList = new ArrayList<Double>();
 	
-	public RewardCalculator(UserRepository userRepository) {
-		userList = userRepository.getUserList();
-	}
-	
-	public List<Double> makeRewardList() {
-		for (int i = 0; i < userList.size(); i++) {
-			rewardList.add((double)0);
-		}
-		
-		for (int i = playerFirstInx; i < userList.size(); i++) {
-			modifyReward(i);
-		}
-		
-		return rewardList;
-	}
-	
-	public void modifyReward(int playerInx) {
-		if (existWinner(playerInx)) {
-			int winnerInx = getWinnerInx(playerInx);
-			int loserInx = getLoserInx(winnerInx, playerInx);
-			double bettingMoney = ((Player)userList.get(playerInx)).bettingMoney().toDouble();
-			
-			rewardList.set(winnerInx, rewardList.get(winnerInx) + bettingMoney);
-			rewardList.set(loserInx, rewardList.get(loserInx) - bettingMoney);
-		}
-	}
-	
-	public boolean existWinner(int playerInx) {
-		Score dealerScore = userList.get(dealerInx).toCards().toScore();
-		Score playerScore = userList.get(playerInx).toCards().toScore();
-		
-		return (playerScore.isBust() || !playerScore.isDraw(dealerScore) || playerAlwaysWin(playerInx));
-	}
+    public RewardCalculator(UserRepository userRepository) {
+        userList = userRepository.getUserList();
+    }
 
-	public boolean playerAlwaysWin(int playerInx) {
-		return (userList.get(playerInx).toCards().isBlackJack() 
-				&& !userList.get(dealerInx).toCards().isBlackJack());
-	}
+    public List<Double> makeRewardList() {
+        for (int i = 0; i < userList.size(); i++) {
+            rewardList.add((double)0);
+        }
 		
-	public int getWinnerInx(int playerInx) {
-		if (playerWin(playerInx) || playerAlwaysWin(playerInx)) {
-			return playerInx;
-		}
-		return dealerInx;
-	}
-	
-	public boolean playerWin(int playerInx) {
-		Score dealerScore = userList.get(dealerInx).toCards().toScore();
-		Score playerScore = userList.get(playerInx).toCards().toScore();
+        for (int i = playerFirstInx; i < userList.size(); i++) {
+            modifyReward(i);
+        }
 		
-		return (!playerScore.isBust() && (playerScore.Win(dealerScore) || dealerScore.isBust()));
-	}
+        return rewardList;
+    }
 	
-	public int getLoserInx(int winnerInx, int playerInx) {
-		if (winnerInx == playerInx) {
-			return dealerInx;
-		}
-		return playerInx;
-	}
+    public void modifyReward(int playerInx) {
+        if (existWinner(playerInx)) {
+            int winnerInx = getWinnerInx(playerInx);
+            int loserInx = getLoserInx(winnerInx, playerInx);
+            double bettingMoney = ((Player)userList.get(playerInx)).bettingMoney().toDouble();
+			
+            rewardList.set(winnerInx, rewardList.get(winnerInx) + bettingMoney);
+            rewardList.set(loserInx, rewardList.get(loserInx) - bettingMoney);
+        }
+    }
+	
+    public boolean existWinner(int playerInx) {
+        Score dealerScore = userList.get(dealerInx).toCards().toScore();
+        Score playerScore = userList.get(playerInx).toCards().toScore();
+		
+        return (playerScore.isBust() || !playerScore.isDraw(dealerScore) || playerAlwaysWin(playerInx));
+    }
+
+    public boolean playerAlwaysWin(int playerInx) {
+        return (userList.get(playerInx).toCards().isBlackJack() 
+                && !userList.get(dealerInx).toCards().isBlackJack());
+    }
+		
+    public int getWinnerInx(int playerInx) {
+        if (playerWin(playerInx) || playerAlwaysWin(playerInx)) {
+            return playerInx;
+            }
+        return dealerInx;
+    }
+	
+    public boolean playerWin(int playerInx) {
+        Score dealerScore = userList.get(dealerInx).toCards().toScore();
+        Score playerScore = userList.get(playerInx).toCards().toScore();
+		
+        return (!playerScore.isBust() && (playerScore.Win(dealerScore) || dealerScore.isBust()));
+    }
+	
+    public int getLoserInx(int winnerInx, int playerInx) {
+        if (winnerInx == playerInx) {
+            return dealerInx;
+            }
+        return playerInx;
+    }
 }

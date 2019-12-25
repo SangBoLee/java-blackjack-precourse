@@ -15,18 +15,18 @@ public class Player extends User {
     // TODO 추가 기능 구현
     
     public Name toName() {
-    	return name;
+        return name;
     }
     
     public String toFirstCardResult() {
-    	return cards.toCardResult();
+        return cards.toCardResult();
     }
     
     public BettingMoney bettingMoney() {
-    	if (cards.isBlackJack()) {
-    		return bettingMoney.multiplyOnePointFive();
-    	}
+        if (cards.isBlackJack()) {
+            return bettingMoney.multiplyOnePointFive();
+        }
     	
-    	return bettingMoney;
+        return bettingMoney;
     }
 }

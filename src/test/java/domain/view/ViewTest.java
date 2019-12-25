@@ -1,6 +1,6 @@
 package domain.view;
 
-import domain.view.ViewInput;
+import domain.view.InputView;
 
 public class ViewTest {
 
